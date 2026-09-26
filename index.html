@@ -53,10 +53,122 @@
 
       <aside class="compare">
         <h2>并排对比</h2>
+        <p class="hint">粒度统计达到 20 颗且无异常值的样本才能参加粒度并排对比。</p>
         <div id="comparePane" class="compare-pane"></div>
       </aside>
     </section>
   </main>
+
+  <!-- 粒度测量：逐颗登记粒径、圆度、测点说明 -->
+  <div id="grainDialog" class="modal-mask" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="grainDialogTitle">
+      <header class="modal-head">
+        <div>
+          <h2 id="grainDialogTitle">粒度测量</h2>
+          <p id="grainDialogSub" class="hint"></p>
+        </div>
+        <button type="button" class="icon-btn" data-modal-close="grainDialog" aria-label="关闭">×</button>
+      </header>
+
+      <div class="modal-body">
+        <section class="grain-entry card-block">
+          <h3>逐颗登记</h3>
+          <form id="grainForm">
+            <div class="grain-form-grid">
+              <label>粒径 (mm)
+                <input name="diameter" type="number" inputmode="decimal" step="0.001"
+                       min="0.01" max="10" placeholder="如 0.42">
+              </label>
+              <label>圆度
+                <select name="roundness">
+                  <option value="">请选择</option>
+                </select>
+              </label>
+              <label class="span-2">测点说明
+                <input name="point" placeholder="如 视域左上·石英碎屑·第1测点">
+              </label>
+            </div>
+            <p id="grainDupLive" class="hint warn" hidden></p>
+            <label class="confirm-line" hidden>
+              <input type="checkbox" name="confirmDuplicate">
+              <span>该测点已登记过，我确认要在同一测点重复测量</span>
+            </label>
+            <p id="grainFormMsg" class="hint" hidden></p>
+            <button type="submit">登记本颗</button>
+            <p class="hint">规则：粒径须在 0.01–10 mm 之间，越界不予保存；同一测点重复输入会提醒；累计满 20 颗才出统计。</p>
+          </form>
+        </section>
+
+        <section class="grain-stats card-block">
+          <div class="block-head">
+            <h3>粒度统计</h3>
+            <span id="statsBadge" class="pill"></span>
+          </div>
+          <div id="statsPanel"></div>
+        </section>
+
+        <section class="grain-list card-block">
+          <h3>已登记颗粒</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>粒径(mm)</th>
+                  <th>圆度</th>
+                  <th>测点说明</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="grainTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="grain-history card-block">
+          <h3>历史统计结果（旧结果仍可查）</h3>
+          <div id="statsHistory"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- 样本信息编辑：编号/地点/偏光改动会使旧统计失效并留档 -->
+  <div id="sampleDialog" class="modal-mask" hidden>
+    <div class="modal modal-narrow" role="dialog" aria-modal="true" aria-labelledby="sampleDialogTitle">
+      <header class="modal-head">
+        <div>
+          <h2 id="sampleDialogTitle">编辑样本信息</h2>
+          <p class="hint">样本编号、采样地点或偏光类型改动后，旧统计失效并按当前测量重算，旧结果仍可查。</p>
+        </div>
+        <button type="button" class="icon-btn" data-modal-close="sampleDialog" aria-label="关闭">×</button>
+      </header>
+      <div class="modal-body">
+        <form id="sampleEditForm">
+          <label>样本编号<input name="code" required placeholder="BX-17-03"></label>
+          <label>采样地点<input name="location" placeholder="剖面东侧第二层"></label>
+          <div class="pair">
+            <label>放大倍数<input name="magnification" placeholder="40x"></label>
+            <label>偏光类型
+              <select name="polarization">
+                <option>单偏光</option>
+                <option>正交偏光</option>
+                <option>反射光</option>
+              </select>
+            </label>
+          </div>
+          <label>主要矿物<input name="minerals" placeholder="石英、斜长石、黑云母"></label>
+          <label>颗粒结构<input name="texture" placeholder="半自形粒状、碎裂结构"></label>
+          <label>老师批注<textarea name="comment" rows="4" placeholder="记录鉴定依据或疑点"></textarea></label>
+          <p id="sampleEditMsg" class="hint" hidden></p>
+          <button type="submit">保存修改</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="./grain-rules.js"></script>
+  <script src="./storage.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
