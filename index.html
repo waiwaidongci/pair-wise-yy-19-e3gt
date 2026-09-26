@@ -19,6 +19,10 @@
     <section class="layout">
       <form id="sampleForm" class="editor">
         <h2>样本录入</h2>
+        <div id="editBanner" class="edit-banner" hidden>
+          <span>正在编辑样本：编号、地点或偏光改动后旧统计将归档并重算。</span>
+          <button type="button" id="cancelEdit" class="link-btn">取消编辑</button>
+        </div>
         <label>显微照片<input id="photoInput" type="file" accept="image/*"></label>
         <label>样本编号<input name="code" required placeholder="BX-17-03"></label>
         <label>采样地点<input name="location" placeholder="剖面东侧第二层"></label>
@@ -57,6 +61,20 @@
       </aside>
     </section>
   </main>
+
+  <div id="grainModal" class="modal" hidden>
+    <div class="modal-card">
+      <header class="modal-head">
+        <h2>粒度测量</h2>
+        <button type="button" id="grainModalClose" class="link-btn">关闭</button>
+      </header>
+      <div id="grainModalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- 测量规则 → 本地保存 → 页面操作 -->
+  <script src="./rules.js"></script>
+  <script src="./store.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

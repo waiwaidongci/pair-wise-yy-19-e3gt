@@ -244,3 +244,425 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---- 四个粒级配色（柱状图与对比条共用） ---- */
+
+.chart-silt,
+.dot-silt { background: #7aa6c2; }
+
+.chart-fine,
+.dot-fine { background: #2b7666; }
+
+.chart-medium,
+.dot-medium { background: #b98225; }
+
+.chart-coarse,
+.dot-coarse { background: #8f4b3a; }
+
+/* ---- 编辑提示 / 卡片状态 ---- */
+
+.edit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--amber);
+  border-radius: 8px;
+  background: #fbf1de;
+  color: #7a5314;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.grain-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.grain-line a {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.grain-line a:hover {
+  text-decoration: underline;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-ready {
+  background: #dceee4;
+  color: #1d604f;
+}
+
+.badge-pending {
+  background: #f6e7cd;
+  color: #83581a;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.compare-locked {
+  color: #9aa79f;
+}
+
+.link-btn {
+  min-height: auto;
+  background: none;
+  color: var(--accent);
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---- 并排对比中的粒度统计 ---- */
+
+.compare-stats {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+
+.compare-stats p {
+  margin: 0 0 4px;
+  font-size: 12px;
+}
+
+.mini-bars {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e7eee9;
+}
+
+.mini-bar {
+  height: 100%;
+  min-width: 0;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 3px;
+  border-radius: 2px;
+}
+
+.mini-legend {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* ---- 粒度测量弹窗 ---- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px;
+  overflow-y: auto;
+  background: rgb(23 32 29 / 45%);
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-card {
+  width: min(1080px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: 0 24px 80px rgb(12 28 22 / 35%);
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.modal-body {
+  padding: 16px 18px 20px;
+}
+
+.grain-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.grain-left h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.grain-left h3 small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.rules-hint {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.grain-form button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.grain-error {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fbe3df;
+  color: #9a3220;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.grain-table-wrap {
+  max-height: 320px;
+  margin-top: 14px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.grain-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.grain-table th,
+.grain-table td {
+  padding: 7px 9px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.grain-table th {
+  position: sticky;
+  top: 0;
+  background: #eef4f0;
+  color: var(--muted);
+}
+
+.grain-table td:nth-child(4) {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grain-table .empty-row {
+  text-align: center;
+  color: var(--muted);
+  white-space: normal;
+}
+
+/* ---- 统计面板与柱状图 ---- */
+
+.stats,
+.history {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+  padding: 14px;
+}
+
+.history {
+  margin-top: 14px;
+}
+
+.stats h4,
+.history h4 {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.stats-pending {
+  background: #fffaf0;
+}
+
+.stats-pending ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: #83581a;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.stats-note {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.progress {
+  height: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eee4d2;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--amber);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stat-grid > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.stat-grid div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.stat-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.stat-grid strong {
+  font-size: 16px;
+}
+
+.stat-grid em {
+  margin-left: 6px;
+  color: var(--accent);
+  font-size: 11px;
+  font-style: normal;
+}
+
+.stats h5 {
+  margin: 4px 0 8px;
+  font-size: 13px;
+}
+
+.chart {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  height: 200px;
+  align-items: end;
+}
+
+.chart-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  height: 100%;
+}
+
+.chart-bar-wrap {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 130px;
+  border-radius: 6px 6px 0 0;
+  background: #eef2f0;
+}
+
+.chart-bar {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.3s ease;
+}
+
+.chart-value {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chart-label {
+  font-size: 12px;
+}
+
+.chart-range {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* ---- 旧结果 ---- */
+
+.history-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.history-item {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.history-item summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.history-item p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.history-grades {
+  color: var(--ink) !important;
+}
+
+@media (max-width: 860px) {
+  .grain-layout {
+    grid-template-columns: 1fr;
+  }
+}
